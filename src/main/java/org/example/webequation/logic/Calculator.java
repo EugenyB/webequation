@@ -1,5 +1,8 @@
 package org.example.webequation.logic;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class Calculator {
 
     private final double EPS = 1e-9;
@@ -28,5 +31,15 @@ public class Calculator {
             }
         }
         return a;
+    }
+
+    public List<Point> tabulation(double start, double end, double step) {
+        int n = (int)Math.round((end - start) / step + 1);
+
+        return IntStream.range(0, n)
+                .mapToDouble(i -> start + i * step)
+                .filter(x -> !Double.isNaN(f.f(x)))
+                .mapToObj(x -> new Point(x, f.f(x)))
+                .toList();
     }
 }

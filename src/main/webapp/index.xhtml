@@ -19,8 +19,9 @@
                 <p:inputText value="#{formulaBean.a}"/>
                 <p:outputLabel value="b:"/>
                 <p:inputText value="#{formulaBean.b}"/>
+                <p:commandButton value="Табуляция" action="#{formulaBean.tab()}"/>
+                <p:commandButton value="Find" action="#{formulaBean.calculate()}"/>
             </h:panelGrid>
-            <p:commandButton value="Find" action="#{formulaBean.calculate()}"/>
         </h:form>
     </h:body>
 </f:view>

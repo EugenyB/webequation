@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+   <h:head><title>Таблица</title></h:head>
+   <h:body>
+      <h1>#{formulaBean.formula}</h1>
+      <h:dataTable value="#{formulaBean.points}" var="p">
+         <h:column>
+            <f:facet name="header">X</f:facet>
+            #{p.x()}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Y</f:facet>
+            #{p.y()}
+         </h:column>
+      </h:dataTable>
+      <h:form>
+         <h:panelGrid columns="2">
+            <p:outputLabel value="Formula:"/>
+            <p:inputText value="#{formulaBean.formula}"/>
+            <p:outputLabel value="a:"/>
+            <p:inputText value="#{formulaBean.a}"/>
+            <p:outputLabel value="b:"/>
+            <p:inputText value="#{formulaBean.b}"/>
+            <p:commandButton value="Табуляция" action="#{formulaBean.tab()}"/>
+            <p:commandButton value="Find" action="#{formulaBean.calculate()}"/>
+         </h:panelGrid>
+      </h:form>
+   </h:body>
+</f:view>
+</html>

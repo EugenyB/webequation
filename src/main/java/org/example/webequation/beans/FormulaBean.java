@@ -1,5 +1,6 @@
 package org.example.webequation.beans;
 
+import jakarta.el.MethodExpression;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
@@ -7,8 +8,10 @@ import lombok.Setter;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.example.webequation.logic.Calculator;
+import org.example.webequation.logic.Point;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Named
 @SessionScoped
@@ -20,6 +23,8 @@ public class FormulaBean implements Serializable {
 
     private String result = "";
 
+    private List<Point> points;
+
     public String calculate() {
         Expression e = new ExpressionBuilder(formula).variable("x").build();
         Calculator calculator = new Calculator(x -> e.setVariable("x", x).evaluate());
@@ -30,5 +35,12 @@ public class FormulaBean implements Serializable {
             result = "It's probably no root";
         }
         return "result";
+    }
+
+    public String tab() {
+        Expression e = new ExpressionBuilder(formula).variable("x").build();
+        Calculator calculator = new Calculator(x -> e.setVariable("x", x).evaluate());
+        points = calculator.tabulation(a, b, 0.1);
+        return "table";
     }
 }
